@@ -1,3 +1,3 @@
-"# amazon-clone0101" 
-"# amazon-clone0101" 
-"# amazon-clone0101" 
+#amazon-clone
+
+Created by Naga Deepak
