@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './header.css';
+import {BsCart3} from 'react-icons/bs';
 
 var api = 'https://amazon-clone-filters.herokuapp.com';
 
@@ -41,11 +42,13 @@ class Header extends React.Component{
         return (
             <header id="top">
                 <ul>
-                    <li class="navbar-brand header-links"><Link to="/">Amazon</Link></li>
+                    <li class="navbar-brand header-links"><Link to="/">A clone</Link></li>
                     <div>
                         {/* <!-- <li class="header-links"><i class="fas fa-search"></i></li> --> */}
-                        <li class="header-links"><i class="fas fa-shopping-cart"></i></li>
-                        <li><button class='amazonoutlinebutton'>Sign in</button></li>
+                        <li class="header-links"><i class="fas fa-shopping-cart"><Link to="/cart"><BsCart3/></Link></i></li>
+                        <li><Link to="/login" class='amazonoutlinebutton'>{
+                            sessionStorage.username?sessionStorage.username:"Sign in"
+                        }</Link></li>
                     </div>
                 </ul>
                 {this.props.showInputs?(<ul id="mobile-nav-links-list">

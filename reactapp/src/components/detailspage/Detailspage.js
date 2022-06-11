@@ -18,6 +18,32 @@ class Detailspage extends Component {
         .then(data=>this.setState({data}))
     }
 
+    addToCart = (e)=>{
+        fetch(api+'/cart/additem',{
+            method:"PUT",
+            headers:{
+                'accept':'application/json',
+                'content-type':'application/json',
+                'x-access-token':sessionStorage.token
+            },
+            body:JSON.stringify({
+                cartitem:{
+                    "id":this.props.match.params.product_id,
+                    "count":1
+                }
+            })
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.auth == false){
+                alert(data.message);
+                this.props.history.push('/login');
+                return;
+            }
+            this.props.history.push('/cart');
+        })
+    }
+
     renderProduct(product){
         return (
             <div class="detailspagecontainer">
@@ -32,8 +58,8 @@ class Detailspage extends Component {
                         <div class="detailspageimagegallerycontainermobile">
                             <div class="imagegallery" style={{backgroundImage:`url(${product.images[0]})`}}></div>
                         </div>
-                        <button class='amazonoutlinebutton'>Buy now</button>
-                        <button class="headerfontsize amazonbutton">Add to cart</button>
+                        {/* <button class='amazonoutlinebutton'>Buy now</button> */}
+                        <button class="headerfontsize amazonbutton" onClick={this.addToCart}>Add to cart</button>
                     </div>
                     <div class="featurescontainer">
                         <ul class="detailsul">
